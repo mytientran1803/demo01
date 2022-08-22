@@ -1,0 +1,50 @@
+Cau truc useEffect: quan sat tat ca cac bien khi co thay doi
+useEffect( () => {(), [array]}.
+neu ko co gi trong [] thi se chay 1 lan duy nhat luc khoi tao
+neu 1 bien trong [] thi se quan sat moi lan chay
+
+
+useMemo( () => {}, []): tra ve 1 bien
+
+
+--------
+const a = 'one'
+let b
+if (a==='one') {
+	b = 1
+}
+else {
+	b = 2
+}
+-> const b = a === 'one' ? 1 : 2
+hoac su dung cau truc fatory patten
+const factory = (a) => {
+	if (a === 'one') {
+		return 1}
+	hoac su sung switch case:
+	swith(a){
+		return 1}
+	hoac
+	const data = {'admin':{creat:true, edit:true, delete: true}, 'guest':{creat:true, edit:true, delete: false}, 'three':3}: thuong su dung trong lay phan quyen
+		return data[a]
+}
+
+----------------
+const arr = [1, 2, 3, 4]
+const a = arr.map( (item) => {
+	return item *2 //-> 2, 4, 6, 8
+}
+
+const arr = [{name:'1'}, {name:'2'}, {name:'3'}]
+const a = arr.map( (item) => {
+	return {...item} //-> {name:'1'}, {name:'2'}, {name:'3'}
+	return item.name //-> '1','2','3'
+}
+
+--------
+Validation:
+- Khi nguoi dung dang edit du lieu, neu ok thi hien submit: hinh 20220805_193253
+- Kiem tra nguoi dung da submit
+	- Kiem tra phia Frontend: kiem tra dung format: hinh 20220805_627 ,813, 
+	- Kiem tra phia Backend: kiem tra trung thong tin
+

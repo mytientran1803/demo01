@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Máy tính online</title>
+	<style>
+		* {padding: 0; margin: 0;}
+		body {font-family: sans-serif; font-size: 14px; color: #333;}
+		.calculator {width: 300px; height: auto; margin: 20px auto; padding: 10px; border: 1px solid #666; border-radius: 4px;}
+		.box-calculation {width: calc(100% - 16px); background-color: #f7f8f9; border: 1px solid #666; padding: 5px 7px; font-size: 20px; border-bottom: none;}
+		.box-result {width: calc(100% - 16px); background-color: #f9f9f9; border: 1px solid #666; padding: 5px 7px; font-size: 20px; border-top: none; text-align: right;}
+		.box-button button {width: 32.4%; height: 40px; margin-top: 5px; font-size: 20px; color: #fff; border: none; cursor: pointer; border-radius: 4px;}
+		button.number {background-color: #428bca;}
+		button.operation {background-color: #5cb85c;}
+		button.refresh {background-color: #d9534f;}
+		button.del {background-color: #f0ad4e;}
+		button.dot, button.equal {background-color: #5bc0de;
+	}
+	</style>
+</head>
+<body>
+	<div class="calculator">
+		<input type="text" class="init box-calculation" value="">
+		<input type="text" class="init box-result" value="">
+		<div class="box-button">
+			<button class="refresh">CE</button>
+			<button class="del">Del</button>
+			<button class="plus operation">+</button>
+			<button class="minus operation">-</button>
+			<button class="init times operation">*</button>
+			<button class="init divide operation">/</button>
+			<button class="number">9</button>
+			<button class="number">8</button>
+			<button class="number">7</button>
+			<button class="number">6</button>
+			<button class="number">5</button>
+			<button class="number">4</button>
+			<button class="number">3</button>
+			<button class="number">2</button>
+			<button class="number">1</button>
+			<button class="number">0</button>
+			<button class="dot">.</button>
+			<button class="init equal">=</button>
+		</div>
+	</div>
+	
+	
+	<script>
+        /*
+		- Array: ham thuong su dung: forEach, filter, find, map
+		+ Kieu du lieu: number, string, bool, object, array, funtion
+            elements.forEach((item) => { }) se giong voi for(let i = 0; i< elements.length; i++) {}
+            - Khai bao funtion
+            C1: funtion A(input) {return output}
+            C2: const A = (input) => {return output}
+            - setAttribute: thay doi thuoc tinh
+		- Lay the DOM: document.querySelector('.class'), document.querySelectorAll('.class')
+		VD: neu muon lay cac button co class number: document.querySelectorAll('button.class')
+		- Them 1 su kien ra khoi the DOM: element.addEventListener('click', () => { })
+		- Xoa 1 su kien ra khoi the DOM: element.removeEventListener('click', () => { })
+		- Them thuoc tinh: element.setAttribute('disabled', 'true')
+		- Xoa thuoc tinh: element.removeAttribute('disabled')
+        */
+		
+        // Thực hiện các hành động bên trong khi tài liệu html của trang web được load xong và cây DOM được tạo thành
+		const setAttribute = (selector, attribute, value) => {
+			const elements = document.querySelectorAll(selector)
+			elements.forEach((element) => {
+				element.setAttribute(attribute, value)
+			})
+		}
+
+		const removeAttribute = (selector, attribute) => {
+			const elements = document.querySelectorAll(selector)
+			elements.forEach((element) => {
+				element.removeAttribute(attribute)
+			})
+		}
+		/*De thuc hien chay cac nut co 2 cach
+		document.ready(() => {
+            //document.querySelector hoac document.querySelectorAll: tra ve ket qua tuong ung 1 object dau tien bat gap hoac 1 array
+            
+			- C1:
+			const elements = document.querySelectorAll('.init')
+            elements.forEach((element) => { 
+                element.setAttribute ('disabled', 'true')
+            })
+			
+        })
+		- C2: 
+		window.addEventListener('DOMContentLoaded', (event) => {
+			setAttribute('.init', 'disabled', 'true')
+		})
+		
+		- C3:*/
+		
+		if(document.readyState !== 'loading') {
+			setAttribute('.init', 'disabled', 'true')
+		}
+		else {
+			document.addEventListener('DOMContentLoaded', (event) => {
+				setAttribute('.init', 'disabled', 'true')
+			})
+		}
+
+        // Thực hiện các hành động bên trong khi click vào các nút số
+        const element1s = document.querySelectorAll('.box-button button.number')
+        element1s.forEach((element1) => {
+            element1.addEventListener('click', () => {
+                $char = element1.innerHTML; // Lấy số vừa click
+                const calculation = document.querySelector('.box-calculation'); // Lấy chuỗi giá trị trong ô phép tính
+                $value_calculation = calculation.value
+                calculation.value = $value_calculation + $char // Thêm số vừa click vào sau chuỗi giá trị trong ô phép tính
+				/*Co 2 cach de go bo vo cac nut phep tinh va dau bang:
+				- C1:
+                const a = document.querySelector('.box-button button.operation'); // Gỡ bỏ vô hiệu hoá các nút phép toán
+                a.forEach((item) => {
+                    item.removeAttribute('disable')
+                })
+              
+                const b = document.querySelector('.box-button button.equal'); //  Gỡ bỏ vô hiệu hoá nút bằng
+                b.forEach((item) => {
+                    item.removeAttribute('disable')
+                })
+                - C2:*/
+				removeAttribute('.box-button button.operation','disable')
+				removeAttribute('.box-button button.equal', 'disable')
+            })
+        })
+
+		//Thực hiện các hành động bên trong khi click vào các nút dấu chấm
+		const element2s = document.querySelectorAll('.box-button button.dot')
+		element2s.forEach((element2) => {
+			element2.addEventListener('click', () => {
+				$char = element2.innerHTML; // Lấy dấu chấm
+
+				const calculator = document.querySelector('.box-calculation')
+				$value_calculation = calculator.value; // Lấy chuỗi giá trị trong ô phép tính
+
+
+				calculator.value = $value_calculation + $char; // Thêm dấu chấm vào sau chuỗi giá trị trong ô phép tính
+
+				setAttribute('.box-button button.operation', 'disabled', 'true'); // Vô hiệu hoá các nút phép toán
+				setAttribute('.box-button button.dot', 'disabled', 'true'); // Vô hiệu hoá nút dấu chấm
+			})
+		})
+
+		// Thực hiện các hành động bên trong khi click vào các nút CE
+		const element3s = document.querySelectorAll('.box-button button.refresh')
+		element3s.forEach((element3) => {
+			element3.addEventListener('click', () => {
+				const calculation = document.querySelector('.box-calculation')
+				calculation.value = ''
+
+				const result = document.querySelector('.box-result')
+				result.value = ''
+			})
+		})
+
+		// Thực hiện các hành động bên trong khi click vào các nút Del
+		const element4s = document.querySelectorAll('.box-button button.del')
+		element4s.forEach((element4) => {
+			element4.addEventListener('click', () => {
+				const calculation = document.querySelector('.box-calculation')
+				$string = calculation.value
+				calculation.value = $string.substring(0, $string.length - 1)
+			})
+		})
+
+		// Thực hiện các hành động bên trong khi click vào các nút phép toán
+		const element5s = document.querySelectorAll('.box-button button.operation')
+		element5s.forEach((element5) => {
+			element5.addEventListener('click', () => {
+				$char = element5.innerHTML
+
+				const calculation = document.querySelector('.box-calculation')
+				$value_calculation = calculation.value
+				
+				calculation.value = $value_calculation + $char
+
+				setAttribute('.box-button button.times', 'disabled', 'true')
+				setAttribute('.box-button button.divide', 'disabled', 'true')
+				removeAttribute('.box-button button.dot', 'disabled')
+			})
+		})
+
+		// Thực hiện các hành động bên trong khi click vào các nút bằng
+		const element6s = document.querySelectorAll('.box-button button.equal')
+		element6s.forEach((element6) => {
+			element6.addEventListener('click', () => {
+				const calculation = document.querySelector('.box-calculation')
+				$value_calculation = calculation.value
+
+				const result = document.querySelector('.box-result')
+				result.value = eval($value_calculation)
+			})
+		})
+
+
+        /*
+        // Thực hiện các hành động bên trong khi tài liệu html của trang web được load xong và cây DOM được tạo thành
+        $(document).ready(function() {
+			$('.box-calculation').attr('disabled', 'true'); // Vô hiệu hoá ô phép tính
+			$('.box-result').attr('disabled', 'true'); // Vô hiệu hoá ô kết quả
+			$('.box-button button.times').attr('disabled', 'true'); // Vô hiệu hoá nút nhân
+			$('.box-button button.divide').attr('disabled', 'true'); // Vô hiệu hoá nút chia
+			$('.box-button button.equal').attr('disabled', 'true'); // Vô hiệu hoá nút bằng
+		});
+
+		// Thực hiện các hành động bên trong khi click vào các nút số
+		$('.box-button button.number').on('click', function() {
+			$char = $(this).html(); // Lấy số vừa click
+			$value_calculation = $('.box-calculation').val(); // Lấy chuỗi giá trị trong ô phép tính
+			$('.box-calculation').val($value_calculation + $char); // Thêm số vừa click vào sau chuỗi giá trị trong ô phép tính
+			$('.box-button button.operation').removeAttr('disabled'); // Gỡ bỏ vô hiệu hoá các nút phép toán
+			$('.box-button button.equal').removeAttr('disabled'); // Gỡ bỏ vô hiệu hoá nút bằng
+		});
+
+		// Thực hiện các hành động bên trong khi click vào các nút dấu chấm
+		$('.box-button button.dot').on('click', function() {
+			$char = $(this).html(); // Lấy dấu chấm
+			$value_calculation = $('.box-calculation').val(); // Lấy chuỗi giá trị trong ô phép tính
+			$('.box-calculation').val($value_calculation + $char); // Thêm dấu chấm vào sau chuỗi giá trị trong ô phép tính
+			$('.box-button button.operation').attr('disabled', 'true'); // Vô hiệu hoá các nút phép toán
+			$(this).attr('disabled', 'true'); // Vô hiệu hoá nút dấu chấm
+		});
+
+		// Thực hiện các hành động bên trong khi click vào các nút CE
+		$('.box-button button.refresh').on('click', function() {
+			$('.box-calculation').val(''); // Làm trống ô phép tính
+			$('.box-result').val(''); // Làm trống ô kết quả
+		});
+
+		// Thực hiện các hành động bên trong khi click vào các nút Del
+		$('.box-button button.del').on('click', function() {
+			$string = $('.box-calculation').val(); // Lấy giá trị trong ô phép tính
+			$('.box-calculation').val($string.substring(0, $string.length - 1)); // Xoá ký tự cuối cùng chuỗi giá trị trong ô phép tính
+		});
+
+		// Thực hiện các hành động bên trong khi click vào các nút phép toán
+		$('.box-button button.operation').on('click', function() {
+			$char = $(this).html(); // Lấy dấu phép toán vừa click
+			$value_calculation = $('.box-calculation').val(); // Lấy chuỗi giá trị trong ô phép tính
+			$('.box-calculation').val($value_calculation + $char); // Thêm dấu phép toán vừa click vào sau chuỗi giá trị trong ô phép tính
+			$('.box-button button.times').attr('disabled', 'true'); // Vô hiệu hoá nút nhân
+			$('.box-button button.divide').attr('disabled', 'true'); // Vô hiệu hoá nút chia
+			$('.box-button button.dot').removeAttr('disabled'); // Gỡ bỏ vô hiệu hoá nút dấu chấm
+		});
+
+		// Thực hiện các hành động bên trong khi click vào các nút bằng
+		$('.box-button button.equal').on('click', function() {
+			$result = $('.box-calculation').val(); // Lấy chuỗi giá trị trong ô phép tính
+			$('.box-result').val(eval($result)); // Hiển thị kết quả trong ô kết quả
+		});*/
+	</script>
+</body>
+</html>

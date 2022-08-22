@@ -1,0 +1,21 @@
+.user {
+    border: 1px solid #c9c9c9;
+    border-radius: 15px;
+    padding-left: 8px;
+    margin: 20px 0;
+}
+.main-user {
+    padding-bottom: 15px;
+    margin-top: 8px;
+}
+.footer-user button.button-color {
+    background-color: yellowgreen;
+    margin-right: 15px;
+}
+.footer-user button.delete {
+    background-color: red;
+}
+.footer-user button {
+    width: 100px;
+    margin-bottom: 8px;
+}
