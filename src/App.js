@@ -1,15 +1,22 @@
 
 import './App.css';
-//import HomeTest01 from './components/HomeTest01';
-import HomeTest06 from './components/HomeTest06';
-//import HomeTest02 from './components/HomeTest02';
+import { Routes, Route, Link } from "react-router-dom";
+import User from './pages/User';
+import Organ from './pages/Organization';
 
 
 
 function App() {
   return (
     <div>
-      <HomeTest06/>
+      <Link to='/'>User</Link>
+      <Link to='/Organ'>Organization</Link>
+
+      <Routes>
+        <Route path="/" element={<User />} />
+        <Route path="/Organ" element={<Organ />} />
+      </Routes>
+      
     </div>
   );
 }

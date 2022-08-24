@@ -27,16 +27,9 @@ const ModalView = ({id}) => {
                             <div className="mb-3">
                                 Name: {data.name}
                                 {/* hoac <label for="form-name" className="form-label">Name:</label> */}
-                                 {/*  <input type="text" className="form-control" id="form-name" name="name" value={form.name} placeholder="Nhập tên của bạn" onChange={onChange}/> */}
+                                {/* <input type="text" className="form-control" id="form-name" name="name" value={form.name} placeholder="Nhập tên Organization" onChange={onChange}/> */}
                             </div>
-                            <div className="mb-3">
-                                Email: {data.email}
-                                {/* <label for="recipient-name" className="form-label">Email:</label> */}
-                                {/* <input type="email" className="form-control" id="form-email" name="email" value={form.email} placeholder="...@gmail.com" onChange={onChange}/> */}
-                            </div>
-                            <div className="mb-3">
-                                Phone: {data.phone}
-                            </div>
+
                             </form>
                         </div>
                         <div className="modal-footer">

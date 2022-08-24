@@ -34,7 +34,7 @@ const validate = (list,form) => {
     return false
 }
 
-const HomeTest01 = () => {
+const User01 = () => {
     const [form, setForm] = useState(user)
     const [search, setSearch] = useState('')
     const [list, setList] = useState([])
@@ -212,4 +212,4 @@ const HomeTest01 = () => {
         </div>
     )
 }
-export default HomeTest01;
+export default User01;

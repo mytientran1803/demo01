@@ -1,14 +1,10 @@
 import { useEffect, useState, useMemo } from "react";
+
 import Form from "./Form";
 import List from "./List";
 import { getOrganizations, createOrganization, editOrganization, deleteOrganization, deletetOrganization } from "../apis/organization";
 import ModalView from "./ModalView";
 
-// 2 kieu validation:
-// 1. khi nguoi dung edit data, neu ok thi hien submit
-// 2. Kiem tra khi nguoi dung da submit roi
-    // dang 1 kiem tra phia fronted, kiem tra dung format
-    // dang 2 kiem tra phia Backend, kiem tra trung
 
 const user = { name: '', email: '' }
 const validate = (list,form) => {
@@ -219,12 +215,12 @@ const Organization = () => {
         const value = e.target.value
         setSearch(value)
     }
-
+    console.log('abc')
     return (
         <div className="container">
             <header className="row">
                 <div className="col-6">
-                    <h2 className="title">User</h2>
+                    <h2 className="title">ORGANIZATION</h2>
                 </div>
                 <div className="col-4">
                     <input className="form-control" value={search} placeholder="Type to search..." onChange={onSearch} />
@@ -249,4 +245,4 @@ const Organization = () => {
         </div>
     )
 }
-export default HomeTest06;
+export default Organization;
