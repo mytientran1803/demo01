@@ -1,6 +1,7 @@
 import './style.css'
+import { Link } from "react-router-dom";
 
-const list = ({ list, View, Delete, Edit }) => {
+const list = ({ list, View, Delete, }) => {
     // .map bien tat ca cac itam thanh the dom
     return (
         <list className='row'>
@@ -14,7 +15,8 @@ const list = ({ list, View, Delete, Edit }) => {
                             </main>
                             <footer className='footer-user'>
                                 <button className="btn button-color" onClick={() => { View(item.id) }}>View</button>
-                                <button className="btn button-color" onClick={() => { Edit(item) }}>Edit</button>
+                                <Link to={`/user/${item.id}/edit`}>
+                                <button className="btn button-color">Edit</button></Link>
                                 <button className="btn delete" onClick={() => { Delete(item.id) }}>Delete</button>
                             </footer>
                         </div>

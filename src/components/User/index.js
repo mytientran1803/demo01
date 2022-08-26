@@ -1,8 +1,10 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Form from "./Form";
 import List from "./List";
 import { getUsers, createUser, editUser, deletetUser } from "../apis/users";
 import ModalView from "./ModalView";
+
 
 // 2 kieu validation:
 // 1. khi nguoi dung edit data, neu ok thi hien submit
@@ -61,19 +63,6 @@ const User01 = () => {
         else {
             setResultList(list)
         }
-
-    // }, [search,list])
-
-    
-    // const resultlist = useMemo(() => {
-    //     if (search) {
-    //         const newResultList = list.filter(item => {
-    //             return item.name.includes(search) || item.email.includes(search) // includes tiem các phần tử có từ khóa tương ứng và hiển thị ra màng hình theo cái newResultList
-    //         })
-    //         return newResultList
-    //     }
-    //     return list
-
     }, [search, list])
 
     const onChange = (e) => {
@@ -92,13 +81,7 @@ const User01 = () => {
         })
     }
     const Submit = () => {
-        // const isValidated = validate(list, form)
 
-        // if(!isValidated){
-        //     setErro(true)
-        // }
-
-        // if(isValidated) {
             //create
             if (!form.id) {
                 createUser(form).then(response => {
@@ -138,7 +121,6 @@ const User01 = () => {
             const element = document.querySelector('#modal-form-user')
             const modal = window.bootstrap.Modal.getOrCreateInstance(element)
             modal.show();
-        // }
         
     }
     const onCreate = () => {
@@ -193,9 +175,11 @@ const User01 = () => {
                     <input className="form-control" value={search} placeholder="Type to search..." onChange={onSearch} />
                 </div>
                 <div className="col-2">
-                    <button type="button" className="btn btn-primary" onClick={onCreate}>
+                    <Link to='/user/create'>
+                    <button className="btn btn-primary">
                         Create
                     </button>
+                    </Link>
                 </div>
             </header>
             
